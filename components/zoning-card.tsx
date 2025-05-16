@@ -12,6 +12,9 @@ interface ZoningCardProps {
 }
 
 export default function ZoningCard({ zoning, onClick }: ZoningCardProps) {
+  // Determine if this is an R1-type zoning (includes variants like RS, RH-1)
+  const isR1Type = zoning.zoningType === "R1" || zoning.zoningType === "RS" || zoning.zoningType === "RH-1"
+
   return (
     <Card className="overflow-hidden transition-all duration-200 hover:shadow-md">
       <CardContent className="p-6">
@@ -23,7 +26,12 @@ export default function ZoningCard({ zoning, onClick }: ZoningCardProps) {
               {zoning.county} County
             </div>
           </div>
-          <Badge variant={zoning.zoningType === "R1" ? "default" : "secondary"}>{zoning.zoningType}</Badge>
+          <Badge
+            variant={isR1Type ? "default" : "secondary"}
+            className={isR1Type ? "bg-blue-500 hover:bg-blue-600" : "bg-green-500 hover:bg-green-600"}
+          >
+            {zoning.zoningType}
+          </Badge>
         </div>
 
         <div className="space-y-3 mt-4">

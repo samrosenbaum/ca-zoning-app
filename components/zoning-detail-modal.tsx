@@ -26,7 +26,20 @@ export default function ZoningDetailModal({ zoning, isOpen, onClose }: ZoningDet
         <DialogHeader>
           <div className="flex items-center justify-between">
             <DialogTitle className="text-xl">{zoning.city} Zoning Details</DialogTitle>
-            <Badge variant={zoning.zoningType === "R1" ? "default" : "secondary"}>{zoning.zoningType}</Badge>
+            <Badge
+              variant={
+                zoning.zoningType === "R1" || zoning.zoningType === "RS" || zoning.zoningType === "RH-1"
+                  ? "default"
+                  : "secondary"
+              }
+              className={
+                zoning.zoningType === "R1" || zoning.zoningType === "RS" || zoning.zoningType === "RH-1"
+                  ? "bg-blue-500"
+                  : "bg-green-500"
+              }
+            >
+              {zoning.zoningType}
+            </Badge>
           </div>
           <DialogDescription className="flex items-center">
             <MapPin className="w-4 h-4 mr-1" />
